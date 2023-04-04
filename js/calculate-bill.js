@@ -8,7 +8,7 @@ const strBill = document.querySelector('.billString');
 //create the function that will be called when the calculate button is pressed
 const totalPhoneBill = () => {
     // get the value of the strBill variable and set the billStrElem to it's value
-    let billStrElem = strBill.value;
+    let billStrElem = strBill.value.toLowerCase();
     //  * this function should read the string value entered - split it on a comma.
     let smsAndCallArr = billStrElem.split(',');
     // create a total variable and set it 0
@@ -24,7 +24,17 @@ const totalPhoneBill = () => {
     // create a variable to store the sum total of the sms and call
     let roundedValue =  `${smsAndCallSum.toFixed(2)}`;
     // now get the innerHTML of the total bill variable and set it to the rounded value
+    
+    if (roundedValue > 20.00) {
+        totalBill.style.color = 'orange';
+    } else if (roundedValue > 30.00) {
+        totalBill.style.color = 'red';
+    } else {
+        totalBill.style.color = 'black';
+    }
+    
     totalBill.innerHTML = roundedValue;
+    // If the total cost exceed R20.00 show the total cost in orange, if over R30 show it in red.
 }
 
 //link the function to a click event on the calculate button
