@@ -7,6 +7,7 @@ const strBill = document.querySelector('.billString');
 
 //create the function that will be called when the calculate button is pressed
 const totalPhoneBill = () => {
+    // get the value of the strBill variable and set the billStrElem to it's value
     let billStrElem = strBill.value;
     //  * this function should read the string value entered - split it on a comma.
     let smsAndCallArr = billStrElem.split(',');
@@ -20,7 +21,9 @@ const totalPhoneBill = () => {
             currentSmsOrCall === 'call' ? smsAndCallSum += 2.75 : currentSmsOrCall === 'sms' ? smsAndCallSum += 0.65 : smsAndCallSum += 1.30;
 
     }
+    // create a variable to store the sum total of the sms and call
     let roundedValue =  `${smsAndCallSum.toFixed(2)}`;
+    // now get the innerHTML of the total bill variable and set it to the rounded value
     totalBill.innerHTML = roundedValue;
 }
 
