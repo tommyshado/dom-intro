@@ -25,14 +25,14 @@ const totalPhoneBill = () => {
     let roundedValue =  `${smsAndCallSum.toFixed(2)}`;
     // now get the innerHTML of the total bill variable and set it to the rounded value
     
-    if (roundedValue > 20.00) {
-        totalBill.style.color = 'orange';
-    } else if (roundedValue > 30.00) {
+    if (roundedValue > 30.00) {
         totalBill.style.color = 'red';
+    } else if (roundedValue > 20.00) {
+        totalBill.style.color = 'orange';
     } else {
         totalBill.style.color = 'black';
     }
-    
+                                                                                                                                                                                    
     totalBill.innerHTML = roundedValue;
     // If the total cost exceed R20.00 show the total cost in orange, if over R30 show it in red.
 }
