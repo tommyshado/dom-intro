@@ -24,11 +24,15 @@ let smsTotal = 0;
 let callAndSmsTotal = 0;
 //add an event listener for when the add button is pressed
 addBtn.addEventListener('click', addBtnFunc = () => {
-    // get the reference to the call and sms radio button
-    const billItemTypeRadio = document.querySelector(".billItemTypeRadio:checked");
-    // use a ternary operator to check if the value of the radio button is a call or an sms
-    // and add to the correct total
-    billItemTypeRadio.value === 'call' ? callsTotal += 2.75 : smsTotal += 0.75;
+    // looping over the length of the nodeslist using .forEach method
+    // and passing in a callback function which checks the current element if it is checked
+    radioBtn.forEach(radioBtnIn => {
+        if(radioBtnIn.checked) {
+            // used a ternary operator to check if the value of the radio button is a call or an sms
+            // and add to the correct total
+            radioBtnIn.value === 'call' ?  callsTotal += 2.75 : smsTotal += 0.75;
+        }
+    })
 
     callTotalElem.innerHTML = callsTotal.toFixed(2);
     smsTotalElem.innerHTML = smsTotal.toFixed(2);
