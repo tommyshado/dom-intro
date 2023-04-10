@@ -25,7 +25,7 @@ let callSmsTotal = 0;
 
 // add an event listener for a click event to the add bill button and 
 // the .addEventListener() takes in a click event and an anonymous function
-addBillBtn.addEventListener('click', () => {
+addBillBtn.addEventListener('click', textBillAdd = () => {
     // get the value of sms or call and set it to lower case and trim for spaces around it
     let callOrSmsValue = billTextTypeElement.value.toLowerCase().trim();
     // check if the value is a call
@@ -63,7 +63,7 @@ addBillBtn.addEventListener('click', () => {
 
 // add an event listener for a click event to the reset bill button and 
 // the .addEventListener() takes in a click event and an anonymous function
-resetBillBtn.addEventListener('click', () => {
+resetBillBtn.addEventListener('click', textBillReset = () => {
     // set the bill type input form to default
     billTextTypeElement.value = '';
     // reassign the callSum var to 0, so that we can refresh the values and not continue from the previous counting
