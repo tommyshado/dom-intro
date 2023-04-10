@@ -1,22 +1,22 @@
 // get a reference to the sms or call radio buttons
+const addCallAndSmsBtn = document.querySelector('.billTypeButton');
 
-// get refences to all the settings fields
+const totalCallSetting = document.querySelector('.callTotalSettings');
 
-//get a reference to the add button
+const totalSmsSetting = document.querySelector('.smsTotalSettings');
 
-//get a reference to the 'Update settings' button
+let callRadioBtnTotal = 0;
+let smsRadioBtnTotal = 0;
 
-// create a variables that will keep track of all the settings
+addCallAndSmsBtn.addEventListener('click', () => {
+    const radioBillType = document.querySelector(".billItemTypeWithSettings:checked");
 
-// create a variables that will keep track of all three totals.
+    if (radioBillType.value === 'call') {
+        callRadioBtnTotal += 2.75;
+    } else {
+        smsRadioBtnTotal += 0.65;
+    }
 
-//add an event listener for when the 'Update settings' button is pressed
-
-//add an event listener for when the add button is pressed
-
-//in the event listener get the value from the billItemTypeRadio radio buttons
-// * add the appropriate value to the call / sms total
-// * add the appropriate value to the overall total
-// * add nothing for invalid values that is not 'call' or 'sms'.
-// * display the latest total on the screen.
-// * check the value thresholds and display the total value in the right color.
+    totalCallSetting.innerHTML = callRadioBtnTotal.toFixed(2);
+    totalSmsSetting.innerHTML = smsRadioBtnTotal.toFixed(2);
+})
