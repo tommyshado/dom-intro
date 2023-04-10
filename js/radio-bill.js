@@ -23,7 +23,7 @@ let smsTotal = 0;
 // create a variable for call and sms total track and set it to 0
 let callAndSmsTotal = 0;
 //add an event listener for when the add button is pressed
-addBtn.addEventListener('click', () => {
+addBtn.addEventListener('click', addBtnFunc = () => {
     // get the reference to the call and sms radio button
     const billItemTypeRadio = document.querySelector(".billItemTypeRadio:checked");
     // use a ternary operator to check if the value of the radio button is a call or an sms
@@ -52,7 +52,7 @@ addBtn.addEventListener('click', () => {
 
 });
 // create an event listener for the reset button
-resetRadioBtn.addEventListener('click', () => {
+resetRadioBtn.addEventListener('click', resetBtnFunc = () => {
     // reassign the totals
     callsTotal = 0;
     smsTotal = 0;
