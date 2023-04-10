@@ -51,7 +51,7 @@ const totalPhoneBill = () => {
 // create an event listener on the button and when the button clicked it will do the calculation
 btnCalculate.addEventListener('click', totalPhoneBill);
 // resetBtn event listener
-resetBtn.addEventListener('click', resetBtnFunc = () => {
+resetBtn.addEventListener('click', resetCalcuBtnFunc = () => {
     // set the bill string element to an empty string
     billString.value = '';
     // set the bill total element to the string '0.00'
