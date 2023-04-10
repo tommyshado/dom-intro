@@ -1,3 +1,5 @@
+// get reference to the radio buttons
+const radioBtn = document.querySelectorAll('input[type="radio"][name="billItemType"]');
 //get a reference to the add button
 const addBtn = document.querySelector('.radioBillAddBtn');
 // get reference to the reset button
@@ -64,4 +66,8 @@ resetRadioBtn.addEventListener('click', () => {
     callTotalElem.classList.remove('warning', 'danger'); 
     smsTotalElem.classList.remove('warning', 'danger'); 
     totalBill.classList.remove('warning', 'danger');
+    // iterate over the NodeList of the radio buttons and set the checked radio to false
+    for (let i = 0; i < radioBtn.length; i++) {
+        (radioBtn[i]).checked = false;
+    }
 })
