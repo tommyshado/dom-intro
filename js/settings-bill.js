@@ -8,7 +8,7 @@ const totalSmsSetting = document.querySelector('.smsTotalSettings');
 let callRadioBtnTotal = 0;
 let smsRadioBtnTotal = 0;
 
-addCallAndSmsBtn.addEventListener('click', () => {
+addCallAndSmsBtn.addEventListener('click', settingsAddFunc = () => {
     const radioBillType = document.querySelector(".billItemTypeWithSettings:checked");
 
     if (radioBillType.value === 'call') {
