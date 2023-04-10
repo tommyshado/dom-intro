@@ -27,5 +27,10 @@ addCallAndSmsBtn.addEventListener('click', settingsAddFunc = () => {
 
 // add an event listener to the reset button
 defaultReset.addEventListener('click', settingsDefaultFunc = () => {
-
+    // set the radio buttons to be not checked
+    // iterate over the length of the NodeList on the radioBillSettingsBtn and set the checked button to false
+    for(let i = 0; i < radioBillSettingsBtn.length; i++) {
+        // set the current NodeList checked to false
+        (radioBillSettingsBtn[i]).checked = false;
+    }
 })
