@@ -1,4 +1,4 @@
-// get reference to all radio buttons that share the same name
+// get reference to all radio buttons that share the same name, this will return a NodeList with two radio buttons
 const radioBillSettingsBtn = document.querySelectorAll('input[type="radio"][name="billItemTypeWithSettings"]');
 // get a reference to the add button
 const addCallAndSmsBtn = document.querySelector('.billTypeButton');
@@ -8,25 +8,47 @@ const defaultReset = document.querySelector('.defaultTypeButton');
 const totalCallSetting = document.querySelector('.callTotalSettings');
 // get the refence to the smsTotalSetting element 
 const totalSmsSetting = document.querySelector('.smsTotalSettings');
+// get reference to the overall total
+const smsCallTotalSettings = document.querySelector('.totalSettings');
 
+totalCallSetting.innerHTML = '0.00';
+totalSmsSetting.innerHTML = '0.00';
+smsCallTotalSettings.innerHTML = '0.00';
+
+// create variable that will keep track of the totals
 let callRadioBtnTotal = 0;
 let smsRadioBtnTotal = 0;
+let callAndSmsSettingsTotal = 0;
 // add an event listener to the button
 addCallAndSmsBtn.addEventListener('click', settingsAddFunc = () => {
-    const radioBillType = document.querySelector(".billItemTypeWithSettings:checked");
-
-    if (radioBillType.value === 'call') {
-        callRadioBtnTotal += 2.75;
-    } else {
-        smsRadioBtnTotal += 0.65;
-    }
+    // for each element in radioBillSettingBtn, check if they are checked
+    // and add them to the correct totals
+    radioBillSettingsBtn.forEach(radioSettingsBtn => {
+        // check if the node is checked
+        if (radioSettingsBtn.checked) {
+            // check if the node value is a call or an sms
+            // and add the cost to the right total
+            radioSettingsBtn.value === 'call' ? callRadioBtnTotal += 2.75 : smsRadioBtnTotal += 0.65;
+        }
+    })
 
     totalCallSetting.innerHTML = callRadioBtnTotal.toFixed(2);
     totalSmsSetting.innerHTML = smsRadioBtnTotal.toFixed(2);
+    callAndSmsSettingsTotal = (callRadioBtnTotal + smsRadioBtnTotal).toFixed(2);
+    smsCallTotalSettings.innerHTML = callAndSmsSettingsTotal;
 })
 
 // add an event listener to the reset button
 defaultReset.addEventListener('click', settingsDefaultFunc = () => {
+    // reassign the totals to default zero
+    callRadioBtnTotal = 0;
+    smsRadioBtnTotal = 0;
+    callAndSmsSettingsTotal = 0;
+
+    totalCallSetting.innerHTML = '0.00';
+    totalSmsSetting.innerHTML = '0.00';
+    smsCallTotalSettings.innerHTML = '0.00';
+    
     // set the radio buttons to be not checked
     // iterate over the length of the NodeList on the radioBillSettingsBtn and set the checked button to false
     for(let i = 0; i < radioBillSettingsBtn.length; i++) {
