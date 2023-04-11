@@ -55,7 +55,7 @@ resetBtn.addEventListener('click', resetCalcuBtnFunc = () => {
     // set the bill string element to an empty string
     billString.value = '';
     // set the bill total element to the string '0.00'
-    billTotal.innerHTML = '0.00';
+    billTotal.innerHTML = (0).toFixed(2);
     // set the billTotal to default color
     billTotal.classList.remove('danger', 'warning');
 })

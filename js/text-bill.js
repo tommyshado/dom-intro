@@ -12,9 +12,9 @@ const addBillBtn = document.querySelector('.addToBillBtn');
 const resetBillBtn = document.querySelector('.billsClearBtn');
 
 // set the totals element to '0.00'
-callTotalElement.innerHTML = '0.00';
-smsTotalElement.innerHTML = '0.00'; 
-totalCallAndSms.innerHTML = '0.00';
+callTotalElement.innerHTML = (0).toFixed(2);
+smsTotalElement.innerHTML = (0).toFixed(2);
+totalCallAndSms.innerHTML = (0).toFixed(2);
 
 // create a call variable for the sum of calls
 let callSum = 0;
@@ -73,9 +73,9 @@ resetBillBtn.addEventListener('click', textBillReset = () => {
     // reassign the callSmsTotal var to 0, so that we can refresh the values and not continue from the previous counting
     callSmsTotal = 0;
     // set the total elements to '0.00'
-    callTotalElement.innerHTML = '0.00';
-    smsTotalElement.innerHTML = '0.00';
-    totalCallAndSms.innerHTML = '0.00';
+    callTotalElement.innerHTML = (0).toFixed(2);
+    smsTotalElement.innerHTML = (0).toFixed(2);
+    totalCallAndSms.innerHTML = (0).toFixed(2);
     // removing the color and set it to default
     callTotalElement.classList.remove('warning', 'danger'); 
     smsTotalElement.classList.remove('warning', 'danger'); 

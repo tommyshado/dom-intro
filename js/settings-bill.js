@@ -11,9 +11,9 @@ const totalSmsSetting = document.querySelector('.smsTotalSettings');
 // get reference to the overall total
 const smsCallTotalSettings = document.querySelector('.totalSettings');
 
-totalCallSetting.innerHTML = '0.00';
-totalSmsSetting.innerHTML = '0.00';
-smsCallTotalSettings.innerHTML = '0.00';
+totalCallSetting.innerHTML = (0).toFixed(2);
+totalSmsSetting.innerHTML = (0).toFixed(2);
+smsCallTotalSettings.innerHTML = (0).toFixed(2);
 
 // create variable that will keep track of the totals
 let callRadioBtnTotal = 0;
@@ -45,9 +45,9 @@ defaultReset.addEventListener('click', settingsDefaultFunc = () => {
     smsRadioBtnTotal = 0;
     callAndSmsSettingsTotal = 0;
 
-    totalCallSetting.innerHTML = '0.00';
-    totalSmsSetting.innerHTML = '0.00';
-    smsCallTotalSettings.innerHTML = '0.00';
+    totalCallSetting.innerHTML = (0).toFixed(2);
+    totalSmsSetting.innerHTML = (0).toFixed(2);
+    smsCallTotalSettings.innerHTML = (0).toFixed(2);
     
     // set the radio buttons to be not checked
     // iterate over the length of the NodeList on the radioBillSettingsBtn and set the checked button to false

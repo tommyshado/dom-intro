@@ -11,9 +11,9 @@ const smsTotalElem = document.querySelector('.smsTotalTwo');
 // get the reference to the total of sms and call element
 const totalBill = document.querySelector('.totalTwo');
 
-callTotalElem.innerHTML = '0.00';
-smsTotalElem.innerHTML = '0.00';
-totalBill.innerHTML = '0.00';
+callTotalElem.innerHTML = (0).toFixed(2);
+smsTotalElem.innerHTML = (0).toFixed(2);
+totalBill.innerHTML = (0).toFixed(2);
 
 
 // create a variable for call total track and set it to 0
@@ -62,9 +62,9 @@ resetRadioBtn.addEventListener('click', resetBtnFunc = () => {
     smsTotal = 0;
     callAndSmsTotal = 0;
 
-    callTotalElem.innerHTML = '0.00';
-    smsTotalElem.innerHTML = '0.00';
-    totalBill.innerHTML = '0.00';
+    callTotalElem.innerHTML = (0).toFixed(2);
+    smsTotalElem.innerHTML = (0).toFixed(2);
+    totalBill.innerHTML = (0).toFixed(2);
 
     // removing the color and set it to default
     callTotalElem.classList.remove('warning', 'danger'); 
