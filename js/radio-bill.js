@@ -26,11 +26,11 @@ let callAndSmsTotal = 0;
 addBtn.addEventListener('click', addBtnFunc = () => {
     // looping over the length of the nodeslist using .forEach method
     // and passing in a callback function which checks the current element if it is checked
-    radioBtn.forEach(radioBtnIn => {
-        if(radioBtnIn.checked) {
+    radioBtn.forEach(radioBtnNode => {
+        if(radioBtnNode.checked) {
             // used a ternary operator to check if the value of the radio button is a call or an sms
             // and add to the correct total
-            radioBtnIn.value === 'call' ?  callsTotal += 2.75 : smsTotal += 0.75;
+            radioBtnNode.value === 'call' ?  callsTotal += 2.75 : smsTotal += 0.75;
         }
     })
 
