@@ -33,6 +33,11 @@ addBtn.addEventListener('click', addBtnFunc = () => {
             radioBtnNode.value === 'call' ?  callsTotal += 2.75 : smsTotal += 0.75;
         }
     })
+    // for the case when the user tries to click the add button without checking a button first
+    if (!(radioBtn[0].checked || radioBtn[1].checked)) {
+        // alert the user with the message
+        alert("Please check a call or bill button.")
+    }
 
     callTotalElem.innerHTML = callsTotal.toFixed(2);
     smsTotalElem.innerHTML = smsTotal.toFixed(2);
