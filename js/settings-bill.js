@@ -28,7 +28,7 @@ addCallAndSmsBtn.addEventListener('click', settingsAddFunc = () => {
         if (radioSettingsNode.checked) {
             // check if the node value is a call or an sms
             // and add the cost to the right total
-            radioSettingsNode.value === 'call' ? callRadioBtnTotal += 2.75 : smsRadioBtnTotal += 0.65;
+            radioSettingsNode.value === 'call' ? callRadioBtnTotal += 2.75 : smsRadioBtnTotal += 0.75;
         }
     })
 
