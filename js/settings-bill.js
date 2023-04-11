@@ -11,6 +11,17 @@ const totalSmsSetting = document.querySelector('.smsTotalSettings');
 // get reference to the overall total
 const smsCallTotalSettings = document.querySelector('.totalSettings');
 
+// settings bill costs reference
+// update settings reference
+const updateSettingsBtn = document.querySelector('.updateSettings');
+// get the reference for both call and sms input
+const settingsCallCost = document.querySelectorAll('input[type="number"][name="settingsCost"]');
+// warning level reference
+const warningLevelElement = document.querySelector('.warningLevelSetting');
+// critical level reference
+const criticalLeveleElement = document.querySelector('.criticalLevelSetting')
+// add an event listener to the update settings button
+
 totalCallSetting.innerHTML = (0).toFixed(2);
 totalSmsSetting.innerHTML = (0).toFixed(2);
 smsCallTotalSettings.innerHTML = (0).toFixed(2);
@@ -31,6 +42,11 @@ addCallAndSmsBtn.addEventListener('click', settingsAddFunc = () => {
             radioSettingsNode.value === 'call' ? callRadioBtnTotal += 2.75 : smsRadioBtnTotal += 0.75;
         }
     })
+    // for the case when the user tries to click the add button without checking a button first
+    if (!(radioBillSettingsBtn[0].checked || radioBillSettingsBtn[1].checked)) {
+        // alert the user with the message
+        alert("Please check a call or bill button.")
+    }
 
     totalCallSetting.innerHTML = callRadioBtnTotal.toFixed(2);
     totalSmsSetting.innerHTML = smsRadioBtnTotal.toFixed(2);
