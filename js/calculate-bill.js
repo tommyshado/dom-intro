@@ -9,15 +9,15 @@ const resetBtn = document.querySelector('.resetBtn');
 
 const totalPhoneBill = () => {
     // get the value of the billString element that the user types and set it to lower case and used trim for spaces around the value
-    let billValue = billString.value.toLowerCase().trim();
+    let billValue = billString.value.toLowerCase();
     // split the bill value on the comma
-    let smsAndCallArr = billValue.split(', ');
+    let smsAndCallArr = billValue.split(',');
     // create a total variable and set it to zero
     let totalSmsAndCall = 0;
     // iterate over the length of the smsAndCallArr 
     for (let i = 0; i < smsAndCallArr.length; i++) {
         // grab the current sms or call
-        const currentSmsOrCall = smsAndCallArr[i];
+        const currentSmsOrCall = smsAndCallArr[i].trim();
         // check if the currentSmsOrCall equals to a call or an sms and add the right amount to the overall total
         switch (currentSmsOrCall) {
             case 'call':
