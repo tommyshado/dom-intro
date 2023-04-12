@@ -1,5 +1,4 @@
 // radio button reference
-const billTypeRadioBtn = document.querySelector(".billItemTypeWithSettings");
 // add and reset button reference
 const billAddTypeBtn = document.querySelector('.billTypeButton');
 const billResetBtn = document.querySelector('.defaultTypeButton');
@@ -40,19 +39,21 @@ let totalCallSet = 0;
 let totalSmsSet = 0;
 let smsAndCallSetTotal = 0;
 // add button event listener
-billAddTypeBtn.addEventListener('click', functBillAdd = () => {
-    if(billTypeRadioBtn) {
-        let checkedValueBtn = billTypeRadioBtn.value;
-        if(checkedValueBtn === 'call') {
-            totalCallSet += callCostUpdate;
-        } else if (checkedValueBtn === 'sms') {
-            totalSmsSet += smsCostUpdate;
-        }
-    }
+billAddTypeBtn.addEventListener('click', functBillAdd = (event) => {
+    // reomoved the billTypeRadioBtn reference inside my function
+    let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
 
-    if (!(billTypeRadioBtn.checked)) {
+    if (!billTypeRadioBtn) {
         alert("Please check a call or bill button.");
     }
+    
+    let checkedValueBtn = billTypeRadioBtn.value;
+    if(checkedValueBtn === 'call') {
+        totalCallSet += callCostUpdate;
+    } else if (checkedValueBtn === 'sms') {
+        totalSmsSet += smsCostUpdate;
+    }
+
     
     callTotalSettings.innerHTML = totalCallSet.toFixed(2);
     smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
@@ -76,6 +77,5 @@ billResetBtn.addEventListener('click', resetBillFunc = () => {
     smsTotalSettings.innerHTML = (0).toFixed(2);
     totalSettings.innerHTML = (0).toFixed(2);
     
-    billTypeRadioBtn.checked = false;
-    totalSettings.classList.remove('danger', 'warning');
+    totalSettings.classList.remove('warning', 'danger');
 })
