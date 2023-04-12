@@ -62,11 +62,13 @@ billAddTypeBtn.addEventListener('click', functBillAdd = () => {
 
     if (smsAndCallSetTotal > criticalUpdate) {
         totalSettings.classList.add('danger');
+        // if it exceeds the critical level show it in red and prevent any new costs from being added
+        // set the updated costs to 0
+        callCostUpdate = 0;
+        smsCostUpdate = 0;
     } else if (smsAndCallSetTotal > warningUpdate) {
         totalSettings.classList.add('warning');
     }
-
-    // if it exceeds the critical level show it in red and prevent any new costs from being added
 });
 // reset button event listener
 
