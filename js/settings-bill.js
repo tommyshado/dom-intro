@@ -39,14 +39,14 @@ let totalCallSet = 0;
 let totalSmsSet = 0;
 let smsAndCallSetTotal = 0;
 // add button event listener
-billAddTypeBtn.addEventListener('click', functBillAdd = (event) => {
+billAddTypeBtn.addEventListener('click', functBillAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
     let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
 
     if (!billTypeRadioBtn) {
         alert("Please check a call or bill button.");
     }
-    
+
     let checkedValueBtn = billTypeRadioBtn.value;
     if(checkedValueBtn === 'call') {
         totalCallSet += callCostUpdate;
@@ -65,6 +65,8 @@ billAddTypeBtn.addEventListener('click', functBillAdd = (event) => {
     } else if (smsAndCallSetTotal > warningUpdate) {
         totalSettings.classList.add('warning');
     }
+
+    // if it exceeds the critical level show it in red and prevent any new costs from being added
 });
 // reset button event listener
 
@@ -78,4 +80,10 @@ billResetBtn.addEventListener('click', resetBillFunc = () => {
     totalSettings.innerHTML = (0).toFixed(2);
     
     totalSettings.classList.remove('warning', 'danger');
+
+    // setting the costs settings to default
+    callCostSetting.value = '';
+    smsCostSetting.value = '';
+    warningLevelSetting.value = '';
+    criticalLevelSetting.value = '';
 })
