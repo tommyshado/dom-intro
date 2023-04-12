@@ -19,18 +19,10 @@ const totalPhoneBill = () => {
         // grab the current sms or call
         const currentSmsOrCall = smsAndCallArr[i].trim();
         // check if the currentSmsOrCall equals to a call or an sms and add the right amount to the overall total
-        switch (currentSmsOrCall) {
-            case 'call':
-                totalSmsAndCall += 2.75;
-                break;
-
-            case 'sms':
+        if (currentSmsOrCall === 'call') {
+            totalSmsAndCall += 2.75;
+        } else if (currentSmsOrCall === 'sms') {
                 totalSmsAndCall += 0.65;
-                break;
-                
-            default:
-                alert("Invalid bill. Please enter correct bill.");
-                break;
         }
     }
     // change the innerHTML body to the totalSmsAndCall rounded to two decimal places
