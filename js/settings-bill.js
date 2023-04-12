@@ -1,74 +1,81 @@
-// get reference to all radio buttons that share the same name, this will return a NodeList with two radio buttons
-const radioBillSettingsBtn = document.querySelectorAll('input[type="radio"][name="billItemTypeWithSettings"]');
-// get a reference to the add button
-const addCallAndSmsBtn = document.querySelector('.billTypeButton');
-// get the reference to the default button
-const defaultReset = document.querySelector('.defaultTypeButton');
-// get the refence to the callTotalSetting element
-const totalCallSetting = document.querySelector('.callTotalSettings');
-// get the refence to the smsTotalSetting element 
-const totalSmsSetting = document.querySelector('.smsTotalSettings');
-// get reference to the overall total
-const smsCallTotalSettings = document.querySelector('.totalSettings');
-
-// settings bill costs reference
+// radio button reference
+const billTypeRadioBtn = document.querySelector(".billItemTypeWithSettings");
+// add and reset button reference
+const billAddTypeBtn = document.querySelector('.billTypeButton');
+const billResetBtn = document.querySelector('.defaultTypeButton');
+// totals reference
+const callTotalSettings = document.querySelector('.callTotalSettings');
+const smsTotalSettings = document.querySelector('.smsTotalSettings');
+const totalSettings = document.querySelector('.totalSettings');
+// set the totals to 0.00
+callTotalSettings.innerHTML = (0).toFixed(2);
+smsTotalSettings.innerHTML = (0).toFixed(2);
+totalSettings.innerHTML = (0).toFixed(2);
+// settings
+const callCostSetting = document.querySelector('.callCostSetting');
+const smsCostSetting = document.querySelector('.smsCostSetting');
+// warning reference
+const warningLevelSetting = document.querySelector('.warningLevelSetting');
+// critical reference
+const criticalLevelSetting = document.querySelector('.criticalLevelSetting');
 // update settings reference
 const updateSettingsBtn = document.querySelector('.updateSettings');
-// get the reference for both call and sms input
-const settingsCallCost = document.querySelectorAll('input[type="number"][name="settingsCost"]');
-// warning level reference
-const warningLevelElement = document.querySelector('.warningLevelSetting');
-// critical level reference
-const criticalLeveleElement = document.querySelector('.criticalLevelSetting')
-// add an event listener to the update settings button
+// global variables for the totals
+let callCostUpdate = 0;
+let smsCostUpdate = 0;
+let warningUpdate = 0;
+let criticalUpdate = 0;
+// event listeners for the buttons
 
-totalCallSetting.innerHTML = (0).toFixed(2);
-totalSmsSetting.innerHTML = (0).toFixed(2);
-smsCallTotalSettings.innerHTML = (0).toFixed(2);
-
-// create variable that will keep track of the totals
-let callRadioBtnTotal = 0;
-let smsRadioBtnTotal = 0;
-let callAndSmsSettingsTotal = 0;
-// add an event listener to the button
-addCallAndSmsBtn.addEventListener('click', settingsAddFunc = () => {
-    // for each element in radioBillSettingBtn, check if they are checked
-    // and add them to the correct totals
-    radioBillSettingsBtn.forEach(radioSettingsNode => {
-        // check if the node is checked
-        if (radioSettingsNode.checked) {
-            // check if the node value is a call or an sms
-            // and add the cost to the right total
-            radioSettingsNode.value === 'call' ? callRadioBtnTotal += 2.75 : smsRadioBtnTotal += 0.75;
-        }
-    })
-    // for the case when the user tries to click the add button without checking a button first
-    if (!(radioBillSettingsBtn[0].checked || radioBillSettingsBtn[1].checked)) {
-        // alert the user with the message
-        alert("Please check a call or bill button.")
-    }
-
-    totalCallSetting.innerHTML = callRadioBtnTotal.toFixed(2);
-    totalSmsSetting.innerHTML = smsRadioBtnTotal.toFixed(2);
-    callAndSmsSettingsTotal = (callRadioBtnTotal + smsRadioBtnTotal).toFixed(2);
-    smsCallTotalSettings.innerHTML = callAndSmsSettingsTotal;
+// add an event listener for the update btn
+updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
+    callCostUpdate = Number(callCostSetting.value);
+    smsCostUpdate = Number(smsCostSetting.value);
+    warningUpdate = Number(warningLevelSetting.value);
+    criticalUpdate = Number(criticalLevelSetting.value);
 })
 
-// add an event listener to the reset button
-defaultReset.addEventListener('click', settingsDefaultFunc = () => {
-    // reassign the totals to default zero
-    callRadioBtnTotal = 0;
-    smsRadioBtnTotal = 0;
-    callAndSmsSettingsTotal = 0;
-
-    totalCallSetting.innerHTML = (0).toFixed(2);
-    totalSmsSetting.innerHTML = (0).toFixed(2);
-    smsCallTotalSettings.innerHTML = (0).toFixed(2);
-    
-    // set the radio buttons to be not checked
-    // iterate over the length of the NodeList on the radioBillSettingsBtn and set the checked button to false
-    for(let i = 0; i < radioBillSettingsBtn.length; i++) {
-        // set the current NodeList checked to false
-        (radioBillSettingsBtn[i]).checked = false;
+// global variable for my functions
+let totalCallSet = 0;
+let totalSmsSet = 0;
+let smsAndCallSetTotal = 0;
+// add button event listener
+billAddTypeBtn.addEventListener('click', functBillAdd = () => {
+    if(billTypeRadioBtn) {
+        let checkedValueBtn = billTypeRadioBtn.value;
+        if(checkedValueBtn === 'call') {
+            totalCallSet += callCostUpdate;
+        } else if (checkedValueBtn === 'sms') {
+            totalSmsSet += smsCostUpdate;
+        }
     }
+
+    if (!(billTypeRadioBtn.checked)) {
+        alert("Please check a call or bill button.");
+    }
+    
+    callTotalSettings.innerHTML = totalCallSet.toFixed(2);
+    smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
+    smsAndCallSetTotal = (totalCallSet + totalSmsSet).toFixed(2);
+    totalSettings.innerHTML = smsAndCallSetTotal;
+
+    if (smsAndCallSetTotal > criticalUpdate) {
+        totalSettings.classList.add('danger');
+    } else if (smsAndCallSetTotal > warningUpdate) {
+        totalSettings.classList.add('warning');
+    }
+});
+// reset button event listener
+
+billResetBtn.addEventListener('click', resetBillFunc = () => {
+    totalCallSet = 0;
+    totalSmsSet = 0;
+    smsAndCallSetTotal = 0;
+
+    callTotalSettings.innerHTML = (0).toFixed(2);
+    smsTotalSettings.innerHTML = (0).toFixed(2);
+    totalSettings.innerHTML = (0).toFixed(2);
+    
+    billTypeRadioBtn.checked = false;
+    totalSettings.classList.remove('danger', 'warning');
 })
