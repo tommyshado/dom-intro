@@ -32,6 +32,14 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
     smsCostUpdate = Number(smsCostSetting.value);
     warningUpdate = Number(warningLevelSetting.value);
     criticalUpdate = Number(criticalLevelSetting.value);
+    
+    totalSettings.classList.remove('warning', 'danger');
+
+    if (smsAndCallSetTotal > criticalUpdate) {
+        totalSettings.classList.add('danger');
+    } else if (smsAndCallSetTotal > warningUpdate){
+        totalSettings.classList.add('warning');
+    }
 })
 
 // global variable for my functions
