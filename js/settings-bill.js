@@ -41,34 +41,30 @@ let smsAndCallSetTotal = 0;
 // add button event listener
 billAddTypeBtn.addEventListener('click', functBillAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
-    let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
-
-    if (!billTypeRadioBtn) {
-        alert("Please check a call or bill button.");
-    }
-
-    let checkedValueBtn = billTypeRadioBtn.value;
-    if(checkedValueBtn === 'call') {
-        totalCallSet += callCostUpdate;
-    } else if (checkedValueBtn === 'sms') {
-        totalSmsSet += smsCostUpdate;
-    }
-
-    
-    callTotalSettings.innerHTML = totalCallSet.toFixed(2);
-    smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
-    smsAndCallSetTotal = (totalCallSet + totalSmsSet).toFixed(2);
-    totalSettings.innerHTML = smsAndCallSetTotal;
-
-    if (smsAndCallSetTotal > criticalUpdate) {
+    if (smsAndCallSetTotal < criticalUpdate) {
+        let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+        
+        let checkedValueBtn = billTypeRadioBtn.value;
+        if(checkedValueBtn === 'call') {
+            totalCallSet += callCostUpdate;
+        } else if (checkedValueBtn === 'sms') {
+            totalSmsSet += smsCostUpdate;
+        }
+        
+        
+        callTotalSettings.innerHTML = totalCallSet.toFixed(2);
+        smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
+        smsAndCallSetTotal = (totalCallSet + totalSmsSet).toFixed(2);
+        totalSettings.innerHTML = smsAndCallSetTotal;
+        
+        if (smsAndCallSetTotal > warningUpdate) {
+            totalSettings.classList.add('warning');
+        }
+        
+    } else {
         totalSettings.classList.add('danger');
-        // if it exceeds the critical level show it in red and prevent any new costs from being added
-        // set the updated costs to 0
-        callCostUpdate = 0;
-        smsCostUpdate = 0;
-    } else if (smsAndCallSetTotal > warningUpdate) {
-        totalSettings.classList.add('warning');
     }
+
 });
 // reset button event listener
 
