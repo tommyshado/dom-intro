@@ -73,6 +73,8 @@ billAddTypeBtn.addEventListener('click', functBillAdd = () => {
         totalSettings.classList.add('danger');
     }
 
+    totalSettings.classList.remove('warning', 'danger');
+
 });
 // reset button event listener
 
