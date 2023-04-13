@@ -45,23 +45,9 @@ addBtn.addEventListener('click', addBtnFunc = () => {
     totalBill.innerHTML = callAndSmsTotal;
 
 
-    if (callsTotal > 50.00) {
-        callTotalElem.classList.add('danger');
+    if (callAndSmsTotal > 50.00) {
         totalBill.classList.add('danger');
-    } else if (callsTotal > 30.00) {
-        callTotalElem.classList.add('warning');
-        totalBill.classList.add('warning');
-    } else if (smsTotal > 50.00) {
-        smsTotalElem.classList.add('danger');
-        totalBill.classList.add('danger');
-    } else if (smsTotal > 30.00) {
-        smsTotalElem.classList.add('warning');
-        totalBill.classList.add('warning');
-    } else if ((callsTotal + smsTotal) > 50) {
-        callTotalElem.classList.add('danger');
-        totalBill.classList.add('danger');
-    } else if ((callsTotal + smsTotal) > 30) {
-        callTotalElem.classList.add('warning');
+    } else if (callAndSmsTotal > 30.00) {
         totalBill.classList.add('warning');
     }
 
