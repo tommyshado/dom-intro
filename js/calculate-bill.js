@@ -25,6 +25,8 @@ const totalPhoneBill = () => {
                 totalSmsAndCall += 0.65;
         }
     }
+    
+    billTotal.classList.remove('danger', 'warning');
     // change the innerHTML body to the totalSmsAndCall rounded to two decimal places
     billTotal.innerHTML = totalSmsAndCall.toFixed(2);
     // check if the total variable is over 30.00
@@ -36,9 +38,8 @@ const totalPhoneBill = () => {
         // set it's color to warning
         billTotal.classList.add('warning');
     // otherwise set to default 
-    } else {
-        billTotal.classList.remove('danger', 'warning');
     }
+    
 }
 // create an event listener on the button and when the button clicked it will do the calculation
 btnCalculate.addEventListener('click', totalPhoneBill);
