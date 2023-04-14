@@ -34,18 +34,13 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
     criticalUpdate = Number(criticalLevelSetting.value);
     
     totalSettings.classList.remove('warning', 'danger');
-
-    if (smsAndCallSetTotal > criticalUpdate) {
-        totalSettings.classList.add('danger');
-    } else if (smsAndCallSetTotal > warningUpdate){
-        totalSettings.classList.add('warning');
-    }
 })
 
 // global variable for my functions
 let totalCallSet = 0;
 let totalSmsSet = 0;
 let smsAndCallSetTotal = 0;
+
 // add button event listener
 billAddTypeBtn.addEventListener('click', functBillAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
@@ -65,16 +60,14 @@ billAddTypeBtn.addEventListener('click', functBillAdd = () => {
         smsAndCallSetTotal = (totalCallSet + totalSmsSet).toFixed(2);
         totalSettings.innerHTML = smsAndCallSetTotal;
         
-        if (smsAndCallSetTotal > warningUpdate) {
-            totalSettings.classList.add('warning');
-        }
-        
-    } else {
-        totalSettings.classList.add('danger');
     }
 
-    // totalSettings.classList.remove('warning', 'danger');
-
+    if (smsAndCallSetTotal >= criticalUpdate) {
+        totalSettings.classList.add('danger');
+    }
+    else if (smsAndCallSetTotal >= warningUpdate) {
+        totalSettings.classList.add('warning');
+    }
 });
 // reset button event listener
 
