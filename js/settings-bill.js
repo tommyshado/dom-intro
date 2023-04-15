@@ -1,6 +1,6 @@
 // radio button reference
 // add and reset button reference
-const billAddTypeBtn = document.querySelector('.billTypeButton');
+let billAddTypeBtn = document.querySelector('.billTypeButton');
 const billResetBtn = document.querySelector('.defaultTypeButton');
 // totals reference
 const callTotalSettings = document.querySelector('.callTotalSettings');
@@ -32,40 +32,37 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
     smsCostUpdate = Number(smsCostSetting.value);
     warningUpdate = Number(warningLevelSetting.value);
     criticalUpdate = Number(criticalLevelSetting.value);
-    
-    totalSettings.classList.remove('warning', 'danger');
+
+    totalSettings.classList.remove('danger');
+
+    billAddTypeBtn.disabled = false;
 })
 
 // global variable for my functions
 let totalCallSet = 0;
 let totalSmsSet = 0;
-let smsAndCallSetTotal = 0;
+let smsAndCallTotal = 0;
 
 // add button event listener
 billAddTypeBtn.addEventListener('click', functBillAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
-    if (smsAndCallSetTotal < criticalUpdate) {
-        let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
-        
-        let checkedValueBtn = billTypeRadioBtn.value;
-        if(checkedValueBtn === 'call') {
-            totalCallSet += callCostUpdate;
-        } else if (checkedValueBtn === 'sms') {
-            totalSmsSet += smsCostUpdate;
-        }
-        
-        
-        callTotalSettings.innerHTML = totalCallSet.toFixed(2);
-        smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
-        smsAndCallSetTotal = (totalCallSet + totalSmsSet).toFixed(2);
-        totalSettings.innerHTML = smsAndCallSetTotal;
-        
+    let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+    
+    if(billTypeRadioBtn.value === 'call') {
+        totalCallSet += callCostUpdate;
+    } else if (billTypeRadioBtn.value === 'sms') {
+        totalSmsSet += smsCostUpdate;
     }
-
-    if (smsAndCallSetTotal >= criticalUpdate) {
+    
+    callTotalSettings.innerHTML = totalCallSet.toFixed(2);
+    smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
+    smsAndCallTotal = (totalCallSet + totalSmsSet).toFixed(2);
+    totalSettings.innerHTML = smsAndCallTotal;
+ 
+    if (smsAndCallTotal >= criticalUpdate) {
         totalSettings.classList.add('danger');
-    }
-    else if (smsAndCallSetTotal >= warningUpdate) {
+        billAddTypeBtn.disabled = true;
+    } else if (smsAndCallTotal >= warningUpdate) {
         totalSettings.classList.add('warning');
     }
 });
@@ -74,7 +71,7 @@ billAddTypeBtn.addEventListener('click', functBillAdd = () => {
 billResetBtn.addEventListener('click', resetBillFunc = () => {
     totalCallSet = 0;
     totalSmsSet = 0;
-    smsAndCallSetTotal = 0;
+    smsAndCallTotal = 0;
 
     callTotalSettings.innerHTML = (0).toFixed(2);
     smsTotalSettings.innerHTML = (0).toFixed(2);
