@@ -33,9 +33,18 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
     warningUpdate = Number(warningLevelSetting.value);
     criticalUpdate = Number(criticalLevelSetting.value);
 
-    totalSettings.classList.remove('danger');
+    totalSettings.classList.remove('warning', 'danger');
 
     if (smsAndCallTotal < criticalUpdate) {
+        billAddTypeBtn.disabled = false;
+    } else {
+        totalCallSet = 0;
+        totalSmsSet = 0;
+        smsAndCallTotal = 0;
+
+        callTotalSettings.innerHTML = (0).toFixed(2);
+        smsTotalSettings.innerHTML = (0).toFixed(2);
+        totalSettings.innerHTML = (0).toFixed(2);
         billAddTypeBtn.disabled = false;
     }
 })
