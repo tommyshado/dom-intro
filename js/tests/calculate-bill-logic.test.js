@@ -23,4 +23,14 @@ describe('totalPhoneBill', () => {
         assert.equal(returnedValue, 3.40);
     });
 
+    it('when passed in more calls or sms, it returns the correct sum', () => {
+        let returnedValue = totalPhoneBill('call, call, call, call');
+        assert.equal(returnedValue, 11);
+    });
+
+    it('when passed in more calls or sms, it returns the correct sum', () => {
+        let returnedValue = totalPhoneBill('sms, sms, sms, sms');
+        assert.equal(returnedValue, 2.6);
+    });
+
 })
