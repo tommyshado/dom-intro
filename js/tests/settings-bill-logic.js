@@ -4,6 +4,9 @@ function settingsBillFactory() {
     let warningLevel = 0;
     let criticalLevel = 0;
 
+    let callCostTotal = 0;
+    let smsCostTotal = 0;
+
     let setCallCost = function(callCostValue) {
         callCost = callCostValue;
     }
@@ -36,6 +39,26 @@ function settingsBillFactory() {
         return criticalLevel;
     }
 
+    let makeCall = function() {
+        callCostTotal += callCost;
+    }
+
+    let getTotalCost = function() {
+        return callCostTotal + smsCostTotal;
+    }
+
+    let getTotalCallCost = function() {
+        return callCostTotal;
+    }
+
+    let getTotalSmsCost = function() {
+        return smsCostTotal;
+    }
+
+    let sendSms = function() {
+        smsCostTotal += smsCost;
+    }
+
     return {
         setCallCost,
         getCallCost,
@@ -44,6 +67,11 @@ function settingsBillFactory() {
         setWarningLevel,
         setCriticalLevel,
         getWarningLevel,
-        getCriticalLevel
+        getCriticalLevel,
+        makeCall,
+        getTotalCost,
+        getTotalCallCost,
+        getTotalSmsCost,
+        sendSms
     }
 }
