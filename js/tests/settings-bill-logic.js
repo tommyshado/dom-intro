@@ -28,12 +28,22 @@ function settingsBillFactory() {
         criticalLevel = criticalLevelValue;
     }
 
+    let getWarningLevel = function() {
+        return warningLevel;
+    }
+
+    let getCriticalLevel = function() {
+        return criticalLevel;
+    }
+
     return {
         setCallCost,
         getCallCost,
         setSmsCost,
         getSmsCost,
         setWarningLevel,
-        setCriticalLevel
+        setCriticalLevel,
+        getWarningLevel,
+        getCriticalLevel
     }
 }
