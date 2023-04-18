@@ -35,7 +35,9 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
 
     totalSettings.classList.remove('danger');
 
-    billAddTypeBtn.disabled = false;
+    if (smsAndCallTotal < criticalUpdate) {
+        billAddTypeBtn.disabled = false;
+    }
 })
 
 // global variable for my functions
