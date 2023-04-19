@@ -71,10 +71,10 @@ billAddTypeBtn.addEventListener('click', functBillAdd = () => {
     smsAndCallTotal = (totalCallSet + totalSmsSet).toFixed(2);
     totalSettings.innerHTML = smsAndCallTotal;
  
-    if (smsAndCallTotal >= criticalUpdate) {
+    if (smsAndCallTotal > criticalUpdate) {
         totalSettings.classList.add('danger');
         billAddTypeBtn.disabled = true;
-    } else if (smsAndCallTotal >= warningUpdate) {
+    } else if (smsAndCallTotal > warningUpdate) {
         totalSettings.classList.add('warning');
     }
 });
