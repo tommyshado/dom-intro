@@ -1,20 +1,33 @@
-const totalPhoneBill = (string) => {
+function calculateBillFactory(smsCallStr) {
+    let callTotal = 0;
+    let smsTotal = 0;
     
-    let billValue = string.toLowerCase();
-    
-    let smsAndCallArr = billValue.split(',');
-    
-    let totalSmsAndCall = 0;
+    let smsCallArr = (smsCallStr.toLowerCase()).split(',');
 
-    for (let i = 0; i < smsAndCallArr.length; i++) {
-        const currentSmsOrCall = smsAndCallArr[i].trim();
+    for (let i = 0; i < smsCallArr.length; i++) {
+        const currentSmsCall = smsCallArr[i].trim();
 
-        if (currentSmsOrCall === 'call') {
-            totalSmsAndCall += 2.75;
-        } else if (currentSmsOrCall === 'sms') {
-                totalSmsAndCall += 0.65;
+        if(currentSmsCall === 'call') {
+            callTotal += 2.75;
+        } else {
+            smsTotal += 0.65;
         }
     }
-    
-    return Number(totalSmsAndCall.toFixed(2));
+
+    let calculateTotal = function() {
+        return (callTotal + smsTotal).toFixed(2);
+    }
+
+    let warningCriticalLevels = function(callSmsTotal) {
+        if(calculateTotal() >= 30) {
+            return 'critical';
+        } else if (calculateTotal() >= 20) {
+            return 'warning';
+        }
+    }
+
+    return {
+        calculateTotal,
+        warningCriticalLevels
+    }
 }
