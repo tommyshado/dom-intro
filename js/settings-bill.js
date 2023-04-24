@@ -20,8 +20,7 @@ const criticalLevelSetting = document.querySelector('.criticalLevelSetting');
 // update settings reference
 const updateSettingsBtn = document.querySelector('.updateSettings');
 
-// add an event listener for the update btn
-updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
+const updateSettingsBill = () => {
     callCostUpdate = Number(callCostSetting.value);
     smsCostUpdate = Number(smsCostSetting.value);
     warningUpdate = Number(warningLevelSetting.value);
@@ -42,10 +41,12 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
         totalSettings.classList.remove('warning');
         billAddTypeBtn.disabled = false;
     }
-})
+}
 
-// add button event listener
-billAddTypeBtn.addEventListener('click', functBillAdd = () => {
+// add an event listener for the update btn
+updateSettingsBtn.addEventListener('click', updateSettingsBill)
+
+const billSettingsAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
     let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
     
@@ -66,7 +67,11 @@ billAddTypeBtn.addEventListener('click', functBillAdd = () => {
     } else if (smsAndCallTotal > warningUpdate) {
         totalSettings.classList.add('warning');
     }
-});
+}
+
+
+// add button event listener
+billAddTypeBtn.addEventListener('click', billSettingsAdd);
 // reset button event listener
 
 billResetBtn.addEventListener('click', resetBillFunc = () => {
