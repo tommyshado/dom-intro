@@ -2,7 +2,8 @@ describe('settingsBillFactory', () => {
     describe('setting values for the settings bill', () => {
         it('should be able to set the call cost', () => {
             let settingsBill = settingsBillFactory();
-    
+            settingsBill.setCriticalLevel(10);
+
             settingsBill.setCallCost(5.87);
             assert.equal(5.87, settingsBill.getCallCost());
         });
@@ -32,7 +33,8 @@ describe('settingsBillFactory', () => {
     describe('using the values', () => {
         it('should be able to use the call cost', () => {
             let settingsBill = settingsBillFactory();
-    
+            settingsBill.setCriticalLevel(10);
+
             settingsBill.setCallCost(2.25);
             settingsBill.setSmsCost(0.85);
 
@@ -47,7 +49,8 @@ describe('settingsBillFactory', () => {
 
         it('should be able to use the call cost for 2 calls at 1.35 each', () => {
             let settingsBill = settingsBillFactory();
-    
+            settingsBill.setCriticalLevel(10);
+
             settingsBill.setCallCost(1.35);
             settingsBill.setSmsCost(0.85);
 
@@ -61,6 +64,7 @@ describe('settingsBillFactory', () => {
 
         it('should be able to use the sms cost', () => {
             let settingsBill = settingsBillFactory();
+            settingsBill.setCriticalLevel(10);
     
             settingsBill.setCallCost(1.35);
             settingsBill.setSmsCost(0.85);
@@ -75,6 +79,7 @@ describe('settingsBillFactory', () => {
 
         it('should be able to send 2 sms at 0.85 each and make calls at 1.35', () => {
             let settingsBill = settingsBillFactory();
+            settingsBill.setCriticalLevel(10);
     
             settingsBill.setCallCost(1.35);
             settingsBill.setSmsCost(0.85);
@@ -102,23 +107,25 @@ describe('settingsBillFactory', () => {
             settingsBill.makeCall();
             settingsBill.makeCall();
 
-            assert.equal('warning', settingsBill.totalClassName());
+            assert.equal('critical', settingsBill.totalClassName());
 
         });
 
-        it('should return the class name `warning` if the warning level is reached', () => {
+        it('should stop the Total call cost from increasing when the critical level is reached', () => {
             let settingsBill = settingsBillFactory();
-
-            settingsBill.setCallCost(5);
+            settingsBill.setCriticalLevel(10);
+            settingsBill.setCallCost(2.50);
             settingsBill.setSmsCost(0.85);
-            settingsBill.setWarningLevel(10);
+            settingsBill.setWarningLevel(5);
 
             settingsBill.makeCall();
-            settingsBill.sendSms();
-            settingsBill.sendSms();
-            settingsBill.sendSms();
+            settingsBill.makeCall();
+            settingsBill.makeCall();
+            settingsBill.makeCall();
+            settingsBill.makeCall();
 
-            assert.equal('critical', settingsBill.totalClassName());
+            assert.equal('warning', settingsBill.totalClassName());
+            assert.equal(10, settingsBill.getTotalCallCost());
         });
 
         it('should return the class name `warning` if the warning level is reached', () => {
@@ -126,7 +133,7 @@ describe('settingsBillFactory', () => {
 
             settingsBill.setCallCost(5);
             settingsBill.setSmsCost(0.85);
-            settingsBill.setWarningLevel(10);
+            settingsBill.setCriticalLevel(20);
 
             settingsBill.makeCall();
             settingsBill.sendSms();
