@@ -20,6 +20,8 @@ const criticalLevelSetting = document.querySelector('.criticalLevelSetting');
 // update settings reference
 const updateSettingsBtn = document.querySelector('.updateSettings');
 
+let billFactoryInstance = settingsBillFactory();
+
 const updateSettingsBill = () => {
     callCostUpdate = Number(callCostSetting.value);
     smsCostUpdate = Number(smsCostSetting.value);
