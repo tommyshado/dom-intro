@@ -1,36 +1,56 @@
-describe('totalPhoneBill', () => {
-    it('totalPhoneBill is of type `function`', () => {
-        assert.equal(typeof totalPhoneBill, 'function');
+describe('calculateBillFactory', () => {
+    it('calculateBillFactory is of type `function`', () => {
+        assert.equal(typeof calculateBillFactory, 'function');
     });
 
-    it('when passed in a string, the function returns a number', () => {
-        let returnedValue = totalPhoneBill('call');
-        assert.equal(typeof returnedValue, 'number');
-    });
+    it('when passed in a uppercase sms and/or call as an argument it handles them when a method is invoked', () => {
+        let returnedValue = calculateBillFactory('CAlL');
+        let total = returnedValue.calculateTotal();
 
-    it('when passed in a uppercase sms and/or call as an argument it handles them', () => {
-        let returnedValue = totalPhoneBill('CAlL');
-        assert.equal(returnedValue, 2.75);
+        assert.equal(total, 2.75);
     });
 
     it('when passed in sms and call it returns the correct sum of both sms and call', () => {
-        let returnedValue = totalPhoneBill('smS,CalL');
-        assert.equal(returnedValue, 3.40);
+        let returnedValue = calculateBillFactory('smS,CalL');
+        let total = returnedValue.calculateTotal();
+
+        assert.equal(total, 3.40);
     });
 
     it('when passed in `sms, call`, it returns splits the string on commas', () => {
-        let returnedValue = totalPhoneBill('sms, call');
-        assert.equal(returnedValue, 3.40);
+        let returnedValue = calculateBillFactory('sms, call');
+        let total = returnedValue.calculateTotal();
+
+        assert.equal(total, 3.40);
     });
 
     it('when passed in more calls or sms, it returns the correct sum', () => {
-        let returnedValue = totalPhoneBill('call, call, call, call');
-        assert.equal(returnedValue, 11);
+        let returnedValue = calculateBillFactory('call, call, call, call');
+        let total = returnedValue.calculateTotal();
+
+        assert.equal(total, 11);
     });
 
     it('when passed in more calls or sms, it returns the correct sum', () => {
-        let returnedValue = totalPhoneBill('sms, sms, sms, sms');
-        assert.equal(returnedValue, 2.6);
+        let returnedValue = calculateBillFactory('sms, sms, sms, sms');
+        let total = returnedValue.calculateTotal();
+
+        assert.equal(total, 2.6);
     });
+
+    it('when the sum of call and sms exceeds 30, it returns the className = `critical`', () => {
+        let returnedValue = calculateBillFactory('sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,call,call,call, call,call,call,call');
+        let total = returnedValue.calculateTotal();
+        let warningLevel = returnedValue.warningCriticalLevels();
+
+        assert.equal(warningLevel, 'critical');
+    })
+    it('when the sum of call and sms exceeds 20, it returns the className = `warning`', () => {
+        let returnedValue = calculateBillFactory('sms, call,sms, call,sms, call,sms, call,smssms, call,sms, call,sms, call,sms, call,sms');
+        let total = returnedValue.calculateTotal();
+        let warningLevel = returnedValue.warningCriticalLevels();
+
+        assert.equal(warningLevel, 'warning');
+    })
 
 })
