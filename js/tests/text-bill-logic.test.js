@@ -42,6 +42,21 @@ describe('textBillFactory', function() {
             assert.equal(returnedValue2.smsCallTotal(), 8.90);
         });
 
+        it('should be able to return the correct total for call and sms value', function() {
+            let returnedValue = textBillFactory();
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+    
+            assert.equal(returnedValue.smsCallTotal(), 3.40);
+
+            let returnedValue2 = textBillFactory();
+                returnedValue2.callSmsCost('call');
+                returnedValue2.callSmsCost('call');
+                returnedValue2.callSmsCost('sms');
+    
+            assert.equal(returnedValue2.smsCallTotal(), 6.15);
+        });
+
             
     })
 })
