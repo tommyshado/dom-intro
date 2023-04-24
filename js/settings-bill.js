@@ -74,7 +74,7 @@ const billSettingsAdd = () => {
 billAddTypeBtn.addEventListener('click', billSettingsAdd);
 // reset button event listener
 
-billResetBtn.addEventListener('click', resetBillFunc = () => {
+const resetBill = () => {
     totalCallSet = 0;
     totalSmsSet = 0;
     smsAndCallTotal = 0;
@@ -90,4 +90,6 @@ billResetBtn.addEventListener('click', resetBillFunc = () => {
     smsCostSetting.value = '';
     warningLevelSetting.value = '';
     criticalLevelSetting.value = '';
-})
+}
+
+billResetBtn.addEventListener('click', resetBill)
