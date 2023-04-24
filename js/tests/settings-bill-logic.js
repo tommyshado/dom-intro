@@ -40,7 +40,9 @@ function settingsBillFactory() {
     }
 
     let makeCall = function() {
-        callCostTotal += callCost;
+        if(!(criticalLevelReached())) {
+            callCostTotal += callCost;
+        }
     }
 
     let getTotalCost = function() {
@@ -56,11 +58,17 @@ function settingsBillFactory() {
     }
 
     let sendSms = function() {
-        smsCostTotal += smsCost;
+        if (!(criticalLevelReached())) {
+            smsCostTotal += smsCost;
+        }
+    }
+
+    let criticalLevelReached = function() {
+        return getTotalCost() >= getCriticalLevel()
     }
 
     let totalClassName = function() {
-        if(getTotalCost() >= getCriticalLevel()) {
+        if(!(criticalLevelReached())) {
             return 'critical';
         }
         if (getTotalCost() >= getWarningLevel()) {
