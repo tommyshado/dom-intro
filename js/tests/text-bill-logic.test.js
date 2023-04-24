@@ -56,7 +56,71 @@ describe('textBillFactory', function() {
     
             assert.equal(returnedValue2.smsCallTotal(), 6.15);
         });
-
-            
     })
+
+    describe('red and orange levels', function() {
+        it('should return `red` when the total is `50` or above', function() {
+            let returnedValue = textBillFactory();
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+
+                assert.equal(returnedValue.addClassColor(), 'red');
+        });
+
+        it('should return `orange` when the total is between `30` and `50`', function() {
+            let returnedValue = textBillFactory();
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+                returnedValue.callSmsCost('call');
+                returnedValue.callSmsCost('sms');
+
+                assert.equal(returnedValue.addClassColor(), 'orange');
+        });
+    });
 })
