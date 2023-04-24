@@ -23,11 +23,20 @@ function textBillFactory() {
         return (getCallCost() + getSmsCost()).toFixed(2);
     }
 
+    const addClassColor = () => {
+        if (smsCallTotal() >= 50) {
+            return 'red';
+        } else if (smsCallTotal() >= 30) {
+            return 'orange';
+        }
+    }
+
     return {
         callSmsCost,
         getCallCost,
         getSmsCost,
-        smsCallTotal
+        smsCallTotal,
+        addClassColor
     }
 }
 
