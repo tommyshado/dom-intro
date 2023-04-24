@@ -20,7 +20,7 @@ function textBillFactory() {
     }
 
     const smsCallTotal = () => {
-        return getCallCost() + getSmsCost();
+        return (getCallCost() + getSmsCost()).toFixed(2);
     }
 
     return {
