@@ -59,6 +59,15 @@ function settingsBillFactory() {
         smsCostTotal += smsCost;
     }
 
+    let totalClassName = function() {
+        if(getTotalCost() >= getCriticalLevel()) {
+            return 'critical';
+        }
+        if (getTotalCost() >= getWarningLevel()) {
+            return 'warning';
+        }
+    }
+
     return {
         setCallCost,
         getCallCost,
@@ -72,6 +81,7 @@ function settingsBillFactory() {
         getTotalCost,
         getTotalCallCost,
         getTotalSmsCost,
-        sendSms
+        sendSms,
+        totalClassName
     }
 }
