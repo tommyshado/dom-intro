@@ -19,12 +19,6 @@ const warningLevelSetting = document.querySelector('.warningLevelSetting');
 const criticalLevelSetting = document.querySelector('.criticalLevelSetting');
 // update settings reference
 const updateSettingsBtn = document.querySelector('.updateSettings');
-// global variables for the totals
-let callCostUpdate = 0;
-let smsCostUpdate = 0;
-let warningUpdate = 0;
-let criticalUpdate = 0;
-// event listeners for the buttons
 
 // add an event listener for the update btn
 updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
@@ -49,11 +43,6 @@ updateSettingsBtn.addEventListener('click', updateSettFunc = () => {
         billAddTypeBtn.disabled = false;
     }
 })
-
-// global variable for my functions
-let totalCallSet = 0;
-let totalSmsSet = 0;
-let smsAndCallTotal = 0;
 
 // add button event listener
 billAddTypeBtn.addEventListener('click', functBillAdd = () => {
