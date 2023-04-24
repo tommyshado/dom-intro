@@ -23,10 +23,10 @@ const updateSettingsBtn = document.querySelector('.updateSettings');
 let billFactoryInstance = settingsBillFactory();
 
 const updateSettingsBill = () => {
-    callCostUpdate = Number(callCostSetting.value);
-    smsCostUpdate = Number(smsCostSetting.value);
-    warningUpdate = Number(warningLevelSetting.value);
-    criticalUpdate = Number(criticalLevelSetting.value);
+    billFactoryInstance.setCallCost(Number(callCostSetting.value));
+    billFactoryInstance.setSmsCost(Number(smsCostSetting.value));
+    billFactoryInstance.setWarningLevel(Number(warningLevelSetting.value));
+    billFactoryInstance.setCriticalLevel(Number(criticalLevelSetting.value));
 
     totalSettings.classList.remove('danger');
 
@@ -50,13 +50,9 @@ updateSettingsBtn.addEventListener('click', updateSettingsBill)
 
 const billSettingsAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
-    let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+    let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked").value;
     
-    if(billTypeRadioBtn.value === 'call') {
-        totalCallSet += callCostUpdate;
-    } else if (billTypeRadioBtn.value === 'sms') {
-        totalSmsSet += smsCostUpdate;
-    }
+    billFactoryInstance.callSmsTotal(billTypeRadioBtn);
     
     callTotalSettings.innerHTML = totalCallSet.toFixed(2);
     smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
