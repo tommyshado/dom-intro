@@ -13,7 +13,7 @@ describe('settingsBillFactory', () => {
             settingsBill.setSmsCost(5);
             assert.equal(5, settingsBill.getSmsCost());
         });
-    
+        
         it('should be able to set the warning level', () => {
             let settingsBill = settingsBillFactory();
     
@@ -90,21 +90,50 @@ describe('settingsBillFactory', () => {
     })
 
     describe('warning and critical levels', () => {
-        it('should return the class name `warning` if the warning level is reached', () => {
+        it('should return the class name `critical` if the critical level is reached', () => {
             let settingsBill = settingsBillFactory();
 
             settingsBill.setCallCost(1.35);
             settingsBill.setSmsCost(0.85);
-            settingsBill.setWarningLevel(7.50);
+            settingsBill.setCriticalLevel(10);
 
             settingsBill.makeCall();
             settingsBill.makeCall();
+            settingsBill.makeCall();
+            settingsBill.makeCall();
+
+            assert.equal('warning', settingsBill.totalClassName());
+
+        });
+
+        it('should return the class name `warning` if the warning level is reached', () => {
+            let settingsBill = settingsBillFactory();
+
+            settingsBill.setCallCost(5);
+            settingsBill.setSmsCost(0.85);
+            settingsBill.setWarningLevel(10);
+
+            settingsBill.makeCall();
+            settingsBill.sendSms();
             settingsBill.sendSms();
             settingsBill.sendSms();
 
-            assert.equal(2.70, settingsBill.getTotalCallCost());
-            assert.equal(1.70, settingsBill.getTotalSmsCost());
+            assert.equal('critical', settingsBill.totalClassName());
+        });
 
+        it('should return the class name `warning` if the warning level is reached', () => {
+            let settingsBill = settingsBillFactory();
+
+            settingsBill.setCallCost(5);
+            settingsBill.setSmsCost(0.85);
+            settingsBill.setWarningLevel(10);
+
+            settingsBill.makeCall();
+            settingsBill.sendSms();
+            settingsBill.sendSms();
+            settingsBill.sendSms();
+
+            assert.equal('critical', settingsBill.totalClassName());
         });
 
 
