@@ -43,19 +43,22 @@ describe('calculateBillFactory', () => {
         assert.equal(total, 2.6);
     });
 
-    it('when the sum of call and sms exceeds 30, it returns the className = `critical`', () => {
-        let returnedValue = calculateBillFactory();
-        returnedValue.callSms('sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,call,call,call, call,call,call,call');
-        let warningLevel = returnedValue.warningCriticalLevels();
+    describe('warning and critical levels', function() {
+        it('when the sum of call and sms exceeds 30, it returns the className = `critical`', () => {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,call,call,call, call,call,call,call');
+            let warningLevel = returnedValue.warningCriticalLevels();
+    
+            assert.equal(warningLevel, 'critical');
+        })
+        it('when the sum of call and sms exceeds 20, it returns the className = `warning`', () => {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('sms, call,sms, call,sms, call,sms, call,smssms, call,sms, call,sms, call,sms, call,sms');
+            let warningLevel = returnedValue.warningCriticalLevels();
+    
+            assert.equal(warningLevel, 'warning');
+        })
+    });
 
-        assert.equal(warningLevel, 'critical');
-    })
-    it('when the sum of call and sms exceeds 20, it returns the className = `warning`', () => {
-        let returnedValue = calculateBillFactory();
-        returnedValue.callSms('sms, call,sms, call,sms, call,sms, call,smssms, call,sms, call,sms, call,sms, call,sms');
-        let warningLevel = returnedValue.warningCriticalLevels();
-
-        assert.equal(warningLevel, 'warning');
-    })
 
 })
