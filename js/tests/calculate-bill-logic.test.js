@@ -11,36 +11,38 @@ describe('calculateBillFactory', () => {
         assert.equal(total, 2.75);
     });
 
-    it('when passed in sms and call it returns the correct sum of both sms and call', () => {
-        let returnedValue = calculateBillFactory();
-        returnedValue.callSms('smS,CalL');
-        let total = returnedValue.calculateTotal();
-
-        assert.equal(total, 3.40);
-    });
-
-    it('when passed in `sms, call`, it returns splits the string on commas', () => {
-        let returnedValue = calculateBillFactory();
-        returnedValue.callSms('sms, call')
-        let total = returnedValue.calculateTotal();
-
-        assert.equal(total, 3.40);
-    });
-
-    it('when passed in more calls or sms, it returns the correct sum', () => {
-        let returnedValue = calculateBillFactory();
-        returnedValue.callSms('call, call, call, call');
-        let total = returnedValue.calculateTotal();
-
-        assert.equal(total, 11);
-    });
-
-    it('when passed in more calls or sms, it returns the correct sum', () => {
-        let returnedValue = calculateBillFactory();
-        returnedValue.callSms('sms, sms, sms, sms');
-        let total = returnedValue.calculateTotal();
-
-        assert.equal(total, 2.6);
+    describe('sum of call and sms', function() {
+        it('when passed in sms and call it returns the correct sum of both sms and call', () => {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('smS,CalL');
+            let total = returnedValue.calculateTotal();
+    
+            assert.equal(total, 3.40);
+        });
+    
+        it('when passed in `sms, call`, it returns splits the string on commas', () => {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('sms, call')
+            let total = returnedValue.calculateTotal();
+    
+            assert.equal(total, 3.40);
+        });
+    
+        it('when passed in more calls or sms, it returns the correct sum', () => {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('call, call, call, call');
+            let total = returnedValue.calculateTotal();
+    
+            assert.equal(total, 11);
+        });
+    
+        it('when passed in more calls or sms, it returns the correct sum', () => {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('sms, sms, sms, sms');
+            let total = returnedValue.calculateTotal();
+    
+            assert.equal(total, 2.6);
+        });
     });
 
     describe('warning and critical levels', function() {
