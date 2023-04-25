@@ -62,5 +62,22 @@ describe('calculateBillFactory', () => {
         })
     });
 
+    describe('undefined', function() {
+        it('when the sum of call and sms is below 20, it returns `undefined`', function() {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('sms, call,sms');
+            returnedValue.calculateTotal();
+            let warningLevel = returnedValue.warningCriticalLevels();
 
+            assert.equal(warningLevel, undefined);
+        });
+        it('when the sum of call and sms is below 20, it returns `undefined`', function() {
+            let returnedValue = calculateBillFactory();
+            returnedValue.callSms('sms, call');
+            returnedValue.calculateTotal();
+            let warningLevel = returnedValue.warningCriticalLevels();
+
+            assert.equal(warningLevel, undefined);
+        });
+    })
 })
