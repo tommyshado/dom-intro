@@ -76,7 +76,7 @@ function settingsBillFactory() {
         }
     }
 
-    let callSmsTotal = function(radioBtnValue) {
+    let radioSmsCall = function(radioBtnValue) {
         if(radioBtnValue === 'call') {
             return callCost;
         } else if (radioBtnValue === 'sms') {
@@ -99,6 +99,6 @@ function settingsBillFactory() {
         getTotalSmsCost,
         sendSms,
         totalClassName,
-        callSmsTotal
+        radioSmsCall
     }
 }
