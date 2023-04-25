@@ -1,16 +1,18 @@
-function calculateBillFactory(smsCallStr) {
+function calculateBillFactory() {
     let callTotal = 0;
     let smsTotal = 0;
     
-    let smsCallArr = (smsCallStr.toLowerCase()).split(',');
-
-    for (let i = 0; i < smsCallArr.length; i++) {
-        const currentSmsCall = smsCallArr[i].trim();
-
-        if(currentSmsCall === 'call') {
-            callTotal += 2.75;
-        } else {
-            smsTotal += 0.65;
+    let callSms = function(smsCallStr) {
+        let smsCallArr = (smsCallStr.toLowerCase()).split(',');
+    
+        for (let i = 0; i < smsCallArr.length; i++) {
+            const currentSmsCall = smsCallArr[i].trim();
+    
+            if(currentSmsCall === 'call') {
+                callTotal += 2.75;
+            } else {
+                smsTotal += 0.65;
+            }
         }
     }
 
@@ -27,6 +29,7 @@ function calculateBillFactory(smsCallStr) {
     }
 
     return {
+        callSms,
         calculateTotal,
         warningCriticalLevels
     }
