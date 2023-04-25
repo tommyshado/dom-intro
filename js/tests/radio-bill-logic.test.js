@@ -123,4 +123,37 @@ describe('radioBillFactory', function() {
                 assert.equal(returnedValue.addClassColor(), 'orange');
         });
     });
+    describe('undefined class name', function() {
+        it('when the total is below `30`, it returns undefined', function() {
+            let returnedValue = radioBillFactory();
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+    
+                    assert.equal(returnedValue.addClassColor(), undefined);
+        });
+        it('when the total is below `30`, it returns undefined', function() {
+            let returnedValue = radioBillFactory();
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+                    returnedValue.callSmsCost('sms');
+                    returnedValue.callSmsCost('call');
+    
+                    assert.equal(returnedValue.addClassColor(), undefined);
+        });
+    })
 })
