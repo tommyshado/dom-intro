@@ -46,7 +46,6 @@ describe('calculateBillFactory', () => {
     it('when the sum of call and sms exceeds 30, it returns the className = `critical`', () => {
         let returnedValue = calculateBillFactory();
         returnedValue.callSms('sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,sms, call,call,call,call, call,call,call,call');
-        let total = returnedValue.calculateTotal();
         let warningLevel = returnedValue.warningCriticalLevels();
 
         assert.equal(warningLevel, 'critical');
@@ -54,7 +53,6 @@ describe('calculateBillFactory', () => {
     it('when the sum of call and sms exceeds 20, it returns the className = `warning`', () => {
         let returnedValue = calculateBillFactory();
         returnedValue.callSms('sms, call,sms, call,sms, call,sms, call,smssms, call,sms, call,sms, call,sms, call,sms');
-        let total = returnedValue.calculateTotal();
         let warningLevel = returnedValue.warningCriticalLevels();
 
         assert.equal(warningLevel, 'warning');
