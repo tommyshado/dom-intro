@@ -29,20 +29,6 @@ const updateSettingsBill = () => {
     billFactoryInstance.setCriticalLevel(Number(criticalLevelSetting.value));
 
     totalSettings.classList.remove('danger');
-
-    // if (smsAndCallTotal < criticalUpdate) {
-    //     billAddTypeBtn.disabled = false;
-    // } else {
-    //     totalCallSet = 0;
-    //     totalSmsSet = 0;
-    //     smsAndCallTotal = 0;
-
-    //     callTotalSettings.innerHTML = (0).toFixed(2);
-    //     smsTotalSettings.innerHTML = (0).toFixed(2);
-    //     totalSettings.innerHTML = (0).toFixed(2);
-    //     totalSettings.classList.remove('warning');
-    //     billAddTypeBtn.disabled = false;
-    // }
 }
 
 // add an event listener for the update btn
@@ -58,13 +44,13 @@ const billSettingsAdd = () => {
     smsTotalSettings.innerHTML = (billFactoryInstance.getTotalSmsCost()).toFixed(2);
     smsAndCallTotal = (billFactoryInstance.getTotalCost()).toFixed(2);
     totalSettings.innerHTML = smsAndCallTotal;
+
+    if (smsAndCallTotal >= billFactoryInstance.getCriticalLevel()) {
+        totalSettings.classList.add('danger');
+    } else if (smsAndCallTotal >= billFactoryInstance.getWarningLevel()) {
+        totalSettings.classList.add('warning');
+    }
  
-    // if (smsAndCallTotal > criticalUpdate) {
-    //     totalSettings.classList.add('danger');
-    //     billAddTypeBtn.disabled = true;
-    // } else if (smsAndCallTotal > warningUpdate) {
-    //     totalSettings.classList.add('warning');
-    // }
 }
 
 
