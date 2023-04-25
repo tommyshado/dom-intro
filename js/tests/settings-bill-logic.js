@@ -47,6 +47,7 @@ function settingsBillFactory() {
     }
 
     let getTotalCost = function() {
+        console.log({callCostTotal, smsCostTotal})
         return callCostTotal + smsCostTotal;
     }
 
@@ -85,6 +86,14 @@ function settingsBillFactory() {
         }
     }
 
+    const updateValues =() => {
+        setCallCost(0);
+        setSmsCost(0);
+        setWarningLevel(0);
+        setCriticalLevel(0);
+        smsCostTotal = 0, callCostTotal = 0;
+    }
+
     return {
         setCallCost,
         getCallCost,
@@ -100,6 +109,7 @@ function settingsBillFactory() {
         getTotalSmsCost,
         sendSms,
         totalClassName,
-        radioSmsCall
+        radioSmsCall,
+        updateValues
     }
 }

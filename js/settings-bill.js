@@ -31,6 +31,30 @@ const updateSettingsBill = () => {
     totalSettings.classList.remove('danger');
 }
 
+const updateScreenValues =() => {
+    billFactoryInstance.updateValues(0, 0, 0, 0)
+
+    
+    callTotalSettings.innerHTML = (billFactoryInstance.getTotalCallCost()).toFixed(2);
+    smsTotalSettings.innerHTML = (billFactoryInstance.getTotalSmsCost()).toFixed(2);
+    smsAndCallTotal = (billFactoryInstance.getTotalCost()).toFixed(2);
+    totalSettings.innerHTML = smsAndCallTotal;
+    totalSettings.classList.remove('danger');
+    totalSettings.classList.remove('warning');
+
+    if(smsAndCallTotal < 1) {
+        return
+    }
+
+    if (smsAndCallTotal >= billFactoryInstance.getCriticalLevel()) {
+        totalSettings.classList.add('danger');
+    } else if (smsAndCallTotal >= billFactoryInstance.getWarningLevel()) {
+        totalSettings.classList.add('warning');
+    }
+    
+
+}
+
 // add an event listener for the update btn
 updateSettingsBtn.addEventListener('click', updateSettingsBill)
 
@@ -45,6 +69,9 @@ const billSettingsAdd = () => {
     smsAndCallTotal = (billFactoryInstance.getTotalCost()).toFixed(2);
     totalSettings.innerHTML = smsAndCallTotal;
 
+    if(smsAndCallTotal < 1) {
+        return
+    }
     if (smsAndCallTotal >= billFactoryInstance.getCriticalLevel()) {
         totalSettings.classList.add('danger');
     } else if (smsAndCallTotal >= billFactoryInstance.getWarningLevel()) {
@@ -72,4 +99,4 @@ const resetBill = () => {
     criticalLevelSetting.value = '';
 }
 
-billResetBtn.addEventListener('click', resetBill)
+billResetBtn.addEventListener('click', updateScreenValues)
