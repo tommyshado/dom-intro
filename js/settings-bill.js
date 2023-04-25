@@ -59,10 +59,6 @@ billAddTypeBtn.addEventListener('click', billSettingsAdd);
 // reset button event listener
 
 const resetBill = () => {
-    totalCallSet = 0;
-    totalSmsSet = 0;
-    smsAndCallTotal = 0;
-
     callTotalSettings.innerHTML = (0).toFixed(2);
     smsTotalSettings.innerHTML = (0).toFixed(2);
     totalSettings.innerHTML = (0).toFixed(2);
