@@ -49,10 +49,9 @@ const updateSettingsBill = () => {
 updateSettingsBtn.addEventListener('click', updateSettingsBill)
 
 const billSettingsAdd = () => {
-    // reomoved the billTypeRadioBtn reference inside my function
+    let smsAndCallTotal = 0;
     let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked").value;
     
-    // alert('clicked', billAddTypeBtn)
     billFactoryInstance.radioSmsCall(billTypeRadioBtn);
     
     callTotalSettings.innerHTML = (billFactoryInstance.getTotalCallCost()).toFixed(2);
@@ -60,12 +59,12 @@ const billSettingsAdd = () => {
     smsAndCallTotal = (billFactoryInstance.getTotalCost()).toFixed(2);
     totalSettings.innerHTML = smsAndCallTotal;
  
-    if (smsAndCallTotal > criticalUpdate) {
-        totalSettings.classList.add('danger');
-        billAddTypeBtn.disabled = true;
-    } else if (smsAndCallTotal > warningUpdate) {
-        totalSettings.classList.add('warning');
-    }
+    // if (smsAndCallTotal > criticalUpdate) {
+    //     totalSettings.classList.add('danger');
+    //     billAddTypeBtn.disabled = true;
+    // } else if (smsAndCallTotal > warningUpdate) {
+    //     totalSettings.classList.add('warning');
+    // }
 }
 
 
