@@ -30,19 +30,19 @@ const updateSettingsBill = () => {
 
     totalSettings.classList.remove('danger');
 
-    if (smsAndCallTotal < criticalUpdate) {
-        billAddTypeBtn.disabled = false;
-    } else {
-        totalCallSet = 0;
-        totalSmsSet = 0;
-        smsAndCallTotal = 0;
+    // if (smsAndCallTotal < criticalUpdate) {
+    //     billAddTypeBtn.disabled = false;
+    // } else {
+    //     totalCallSet = 0;
+    //     totalSmsSet = 0;
+    //     smsAndCallTotal = 0;
 
-        callTotalSettings.innerHTML = (0).toFixed(2);
-        smsTotalSettings.innerHTML = (0).toFixed(2);
-        totalSettings.innerHTML = (0).toFixed(2);
-        totalSettings.classList.remove('warning');
-        billAddTypeBtn.disabled = false;
-    }
+    //     callTotalSettings.innerHTML = (0).toFixed(2);
+    //     smsTotalSettings.innerHTML = (0).toFixed(2);
+    //     totalSettings.innerHTML = (0).toFixed(2);
+    //     totalSettings.classList.remove('warning');
+    //     billAddTypeBtn.disabled = false;
+    // }
 }
 
 // add an event listener for the update btn
@@ -52,11 +52,12 @@ const billSettingsAdd = () => {
     // reomoved the billTypeRadioBtn reference inside my function
     let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked").value;
     
-    billFactoryInstance.callSmsTotal(billTypeRadioBtn);
+    // alert('clicked', billAddTypeBtn)
+    billFactoryInstance.radioSmsCall(billTypeRadioBtn);
     
-    callTotalSettings.innerHTML = totalCallSet.toFixed(2);
-    smsTotalSettings.innerHTML = totalSmsSet.toFixed(2);
-    smsAndCallTotal = (totalCallSet + totalSmsSet).toFixed(2);
+    callTotalSettings.innerHTML = (billFactoryInstance.getTotalCallCost()).toFixed(2);
+    smsTotalSettings.innerHTML = (billFactoryInstance.getTotalSmsCost()).toFixed(2);
+    smsAndCallTotal = (billFactoryInstance.getTotalCost()).toFixed(2);
     totalSettings.innerHTML = smsAndCallTotal;
  
     if (smsAndCallTotal > criticalUpdate) {
