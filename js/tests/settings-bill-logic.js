@@ -36,6 +36,7 @@ function settingsBillFactory() {
     }
 
     let getCriticalLevel = function() {
+        console.log({criticalLevel})
         return criticalLevel;
     }
 
@@ -78,9 +79,9 @@ function settingsBillFactory() {
 
     let radioSmsCall = function(radioBtnValue) {
         if(radioBtnValue === 'call') {
-            return callCost;
+            return makeCall();
         } else if (radioBtnValue === 'sms') {
-            return smsCost;
+            return sendSms();
         }
     }
 
