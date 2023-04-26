@@ -83,20 +83,5 @@ const billSettingsAdd = () => {
 
 // add button event listener
 billAddTypeBtn.addEventListener('click', billSettingsAdd);
-// reset button event listener
-
-const resetBill = () => {
-    callTotalSettings.innerHTML = (0).toFixed(2);
-    smsTotalSettings.innerHTML = (0).toFixed(2);
-    totalSettings.innerHTML = (0).toFixed(2);
-    
-    totalSettings.classList.remove('warning', 'danger');
-
-    // setting the costs settings to default
-    callCostSetting.value = '';
-    smsCostSetting.value = '';
-    warningLevelSetting.value = '';
-    criticalLevelSetting.value = '';
-}
-
+// event listener for updating the screen
 billResetBtn.addEventListener('click', updateScreenValues)
