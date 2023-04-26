@@ -55,9 +55,6 @@ const updateScreenValues =() => {
 
 }
 
-// add an event listener for the update btn
-updateSettingsBtn.addEventListener('click', updateSettingsBill)
-
 const billSettingsAdd = () => {
     let smsAndCallTotal = 0;
     let billTypeRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked").value;
@@ -81,7 +78,9 @@ const billSettingsAdd = () => {
 }
 
 
+// add an event listener for the update btn
+updateSettingsBtn.addEventListener('click', updateSettingsBill)
 // add button event listener
 billAddTypeBtn.addEventListener('click', billSettingsAdd);
 // event listener for updating the screen
-billResetBtn.addEventListener('click', updateScreenValues)
+billResetBtn.addEventListener('click', updateScreenValues);
