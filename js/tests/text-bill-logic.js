@@ -2,7 +2,7 @@ function textBillFactory() {
     let callTotal = 0;
     let smsTotal = 0;
 
-    const callSmsCost = function(callSmsStr) {
+    const setSmsOrCall = function(callSmsStr) {
         let callOrSmsValue = callSmsStr.toLowerCase().trim();
         if (callOrSmsValue === 'call') {
             callTotal += 2.75;
@@ -25,21 +25,17 @@ function textBillFactory() {
 
     const addClassColor = () => {
         if (smsCallTotal() >= 50) {
-            return 'red';
+            return 'danger';
         } else if (smsCallTotal() >= 30) {
-            return 'orange';
+            return 'warning';
         }
     }
 
     return {
-        callSmsCost,
+        setSmsOrCall,
         getCallCost,
         getSmsCost,
         smsCallTotal,
         addClassColor
     }
 }
-
-let returnedValue = textBillFactory()
-returnedValue.callSmsCost('call')
-console.log(returnedValue.getCallCost())
