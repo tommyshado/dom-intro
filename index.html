@@ -5,6 +5,20 @@
     <title></title>
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/x-template" class="totals" defer>
+
+      <tr>
+        <td>{{callCost}}</td>
+        <td>{{smsCost}}</td>
+        <td>{{total}}</td>
+      </tr>
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+
   </head>
   <body>
     <div class="container">
@@ -244,6 +258,8 @@
 
     <script src="js/tests/settings-bill-logic.js" charset="utf-8"></script>
     <script src="js/settings-bill.js" charset="utf-8"></script>
+
+    <script src="./handlebars/totalsTemplates.js"></script>
 
   </body>
 </html>
