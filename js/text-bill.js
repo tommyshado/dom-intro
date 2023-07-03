@@ -23,34 +23,22 @@ let smsSum = 0;
 // create a variable for call and sms total
 let callSmsTotal = 0;
 
+// factory function instance
+const instance = textBillFactory();
+
 // add an event listener for a click event to the add bill button and 
 // the .addEventListener() takes in a click event and an anonymous function
 addBillBtn.addEventListener('click', textBillAdd = () => {
-    // get the value of sms or call and set it to lower case and trim for spaces around it
-    let callOrSmsValue = billTextTypeElement.value.toLowerCase().trim();
-    // check if the value is a call
-    if (callOrSmsValue === 'call') {
-        // append to the call sum variable
-        callSum += 2.75;
-    // otherwise check if it is === an sms
-    } else if (callOrSmsValue === 'sms') {
-        // append to the sms sum variable
-        smsSum += 0.65;
-    // otherwise alert the user to enter the correct bill type
-    } else {
-        alert("Invalid bill type. Please enter correct bill type.");
-    }
 
-    callTotalElement.innerHTML = callSum.toFixed(2);
-    smsTotalElement.innerHTML = smsSum.toFixed(2);
-    callSmsTotal = (callSum + smsSum).toFixed(2);
+    // use setSmsCallCost() method to set sms or a call from the user
+    instance.setSmsOrCall(billTextTypeElement.value);
+
+    callTotalElement.innerHTML = userTemplate({callCost: instance.getCallCost()});
+    smsTotalElement.innerHTML = userTemplate({smsCost: instance.getSmsCost()});
+    callSmsTotal = userTemplate({total: instance.smsCallTotal()});
     totalCallAndSms.innerHTML = callSmsTotal;
 
-    if (callSmsTotal > 50.00) {
-        totalCallAndSms.classList.add('danger');
-    } else if (callSmsTotal > 30.00) {
-        totalCallAndSms.classList.add('warning');
-    }
+    totalCallAndSms.classList.add(instance.addClassColor());
 })
 
 // add an event listener for a click event to the reset bill button and 
@@ -69,7 +57,5 @@ resetBillBtn.addEventListener('click', textBillReset = () => {
     smsTotalElement.innerHTML = (0).toFixed(2);
     totalCallAndSms.innerHTML = (0).toFixed(2);
     // removing the color and set it to default
-    callTotalElement.classList.remove('warning', 'danger'); 
-    smsTotalElement.classList.remove('warning', 'danger'); 
     totalCallAndSms.classList.remove('warning', 'danger');
 })
