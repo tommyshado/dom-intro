@@ -1,5 +1,3 @@
-// get reference to the radio buttons
-const radioBtn = document.querySelectorAll('input[type="radio"][name="billItemType"]');
 //get a reference to the add button
 const addBtn = document.querySelector('.radioBillAddBtn');
 // get reference to the reset button
@@ -15,6 +13,9 @@ callTotalElem.innerHTML = (0).toFixed(2);
 smsTotalElem.innerHTML = (0).toFixed(2);
 totalBill.innerHTML = (0).toFixed(2);
 
+// factory function instance
+
+const instanceOfFactory = radioBillFactory();
 
 // create a variable for call total track and set it to 0
 let callsTotal = 0;
@@ -22,36 +23,27 @@ let callsTotal = 0;
 let smsTotal = 0;
 // create a variable for call and sms total track and set it to 0
 let callAndSmsTotal = 0;
+
 //add an event listener for when the add button is pressed
 addBtn.addEventListener('click', addBtnFunc = () => {
-    // looping over the length of the nodeslist using .forEach method
-    // and passing in a callback function which checks the current element if it is checked
-    radioBtn.forEach(radioBtnNode => {
-        if(radioBtnNode.checked) {
-            // used a ternary operator to check if the value of the radio button is a call or an sms
-            // and add to the correct total
-            radioBtnNode.value === 'call' ?  callsTotal += 2.75 : smsTotal += 0.75;
-        }
-    })
-    // for the case when the user tries to click the add button without checking a button first
-    if (!(radioBtn[0].checked || radioBtn[1].checked)) {
-        // alert the user with the message
-        alert("Please check a call or bill button.")
-    }
+    // get reference to the radio buttons
+    const radioBtn = document.querySelector('input[type="radio"][name="billItemType"]:checked');
 
-    callTotalElem.innerHTML = callsTotal.toFixed(2);
-    smsTotalElem.innerHTML = smsTotal.toFixed(2);
-    callAndSmsTotal = (callsTotal + smsTotal).toFixed(2);
-    totalBill.innerHTML = callAndSmsTotal;
-
-
-    if (callAndSmsTotal > 50.00) {
-        totalBill.classList.add('danger');
-    } else if (callAndSmsTotal > 30.00) {
-        totalBill.classList.add('warning');
+    if (radioBtn) {
+        // set sms or call cost
+        instanceOfFactory.setSmsOrCallCost(radioBtn.value);
+    
+        callTotalElem.innerHTML = userTemplate({ callCost: instanceOfFactory.getCallCost()});
+        smsTotalElem.innerHTML = userTemplate({smsCost: instanceOfFactory.getSmsCost()});
+        callAndSmsTotal = userTemplate({total: instanceOfFactory.smsCallTotal()});
+        totalBill.innerHTML = callAndSmsTotal;
+    
+        totalBill.classList.add(instanceOfFactory.addClassColor());
     }
 
 });
+
+
 // create an event listener for the reset button
 resetRadioBtn.addEventListener('click', resetBtnFunc = () => {
     // reassign the totals
@@ -64,11 +56,5 @@ resetRadioBtn.addEventListener('click', resetBtnFunc = () => {
     totalBill.innerHTML = (0).toFixed(2);
 
     // removing the color and set it to default
-    callTotalElem.classList.remove('warning', 'danger'); 
-    smsTotalElem.classList.remove('warning', 'danger'); 
     totalBill.classList.remove('warning', 'danger');
-    // iterate over the NodeList of the radio buttons and set the checked radio to false
-    for (let i = 0; i < radioBtn.length; i++) {
-        (radioBtn[i]).checked = false;
-    }
 })
